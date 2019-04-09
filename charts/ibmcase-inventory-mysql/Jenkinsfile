@@ -20,14 +20,16 @@ podTemplate(label: 'mypod',
 		DOCKER_USER=`cat /var/run/secrets/registry-account/username`
 		DOCKER_PASSWORD=`cat /var/run/secrets/registry-account/password`
                 export HELM_HOME=$HOME/.helm
-                wget --no-check-certificate https://10.10.1.10:8443/api/cli/icp-linux-amd64
-                bx plugin install icp-linux-amd64
-                helm init --client-only
-                bx pr login -a https://10.10.1.10:8443 --skip-ssl-validation -u \${DOCKER_USER} -p \${DOCKER_PASSWORD} -c id-mycluster-account
-		cp -R /root/.helm /home/jenkins/.helm
+
+                curl -kLo cloudctl https://10.10.1.10:8443/api/cli/cloudctl-linux-amd64
+                curl -kLo helm.tgz https://10.10.1.10:8443/api/cli/helm-linux-amd64.tar.gz
+                tar -xzf helm.tgz
+
+                chmod a+x cloudctl
+                ./cloudctl login -a https://10.10.1.10:8443 -u \${DOCKER_USER} -p \${DOCKER_PASSWORD} -n default
+
 		cd charts
-		helm package ibmcase-inventory-mysql
-                helm install --tls -n bluecompute-inventory-mysql ibmcase-inventory-mysql
+                ../linux-amd64/helm install --tls -n bluecompute-inventory-mysql ibmcase-inventory-mysql
                 """
             }
         }
