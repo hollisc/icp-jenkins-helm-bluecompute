@@ -21,14 +21,17 @@ podTemplate(label: 'mypod',
 		DOCKER_PASSWORD=`cat /var/run/secrets/registry-account/password`
 
                 curl -kLo cloudctl https://10.10.1.10:8443/api/cli/cloudctl-linux-amd64
+                curl -kLo helm.tgz https://10.10.1.10:8443/api/cli/helm-linux-amd64.tar.gz
+                tar -xzf helm.tgz
+                
                 chmod a+x cloudctl
                 ./cloudctl login -a https://10.10.1.10:8443 -u \${DOCKER_USER} -p \${DOCKER_PASSWORD} -n default
-                helm version --tls
+                ./linux-amd64/helm version --tls
                 kubectl get pod
                 # helm init --client-only
 		cd charts
 		# cp -R /root/.helm /home/jenkins/.helm
-                helm install --tls --set image.pullSecret="" --set service.name=sampleweb --set ingress.path="/sample" -n sampleapp web
+                ./linux-amd64/helm install --tls --set image.pullSecret="" --set service.name=sampleweb --set ingress.path="/sample" -n sampleapp web
                 """
             }
         }
