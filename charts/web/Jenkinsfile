@@ -31,7 +31,7 @@ podTemplate(label: 'mypod',
                 # helm init --client-only
 		cd charts
 		# cp -R /root/.helm /home/jenkins/.helm
-                ./linux-amd64/helm install --tls --set image.pullSecret="" --set service.name=sampleweb --set ingress.path="/sample" -n sampleapp web
+                ../linux-amd64/helm install --tls --set image.pullSecret="" --set service.name=sampleweb --set ingress.path="/sample" -n sampleapp web
                 """
             }
         }
