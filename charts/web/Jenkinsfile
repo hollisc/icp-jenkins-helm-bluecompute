@@ -23,6 +23,8 @@ podTemplate(label: 'mypod',
                 curl -kLo cloudctl https://10.10.1.10:8443/api/cli/cloudctl-linux-amd64
                 chmod a+x cloudctl
                 ./cloudctl login -a https://10.10.1.10:8443 -u \${DOCKER_USER} -p \${DOCKER_PASSWORD} -n default
+                helm version --tls
+                kubectl get pod
                 # helm init --client-only
 		cd charts
 		# cp -R /root/.helm /home/jenkins/.helm
