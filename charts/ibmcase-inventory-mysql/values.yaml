@@ -6,7 +6,7 @@ global:
       size:
 
 image:
-  repository: ibmcase/bluecompute-mysql
+  repository: ibmcase/mysql
   tag: latest
   pullPolicy: IfNotPresent
 
