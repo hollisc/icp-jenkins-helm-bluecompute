@@ -14,14 +14,8 @@ spec:
       labels:
 {{ toYaml .Values.labels | indent 8 }}
     spec:
-      volumes:
-        {{ template "elasticsearchDataVolume" . }}
       containers:
       - name: elasticsearch
-        securityContext:
-          capabilities:
-            add:
-              - IPC_LOCK
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
@@ -43,9 +37,6 @@ spec:
             value: "true"
           - name: "ES_JAVA_OPTS"
             value: "-Xms256m -Xmx256m"
-        volumeMounts:
-          - mountPath: /data
-            name: storage
         resources:
 {{ toYaml .Values.resources | indent 12 }}
         ports:
