@@ -13,9 +13,9 @@ service:
   externalPort: 80
   internalPort: 8000
   nodeport:
-    port: 
+    port:
 ingress:
-  hostname: 
+  hostname:
   path: /bluecompute
 resources:
   limits:
@@ -24,20 +24,20 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
-region: 
+region:
 clusterName: cloudcluster
 services:
-  auth: 
+  auth:
     host: bluecompute-auth-auth
     port: 8080
   catalog:
-    host: bluecompute-catalog-catalog
+    host: md-bluecompute-catalog-dev-catalog
     port: 8081
   customer:
-    host: bluecompute-customer-customer
+    host: md-bluecompute-customer-dev-customer
     port: 8080
   orders:
-    host: bluecompute-orders-orders
+    host: md-bluecompute-orders-dev-orders
     port: 8080
   reviews:
     host:
@@ -48,8 +48,8 @@ global:
     apiKey:
 
     target:
-      endpoint: 
+      endpoint:
       org:
       space:
-    
+
     clusterName:
